@@ -28,8 +28,6 @@ class Solution {
 
             for (int i = 0; i < len; i++) {
                 TreeNode node = q.poll();
-
-                // First node of the level → left view
                 if (i == len-1) {
                     result.add(node.val);
                 }
