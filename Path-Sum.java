@@ -13,21 +13,18 @@
 13 *     }
 14 * }
 15 */
-16
-17class Solution {
-18    public boolean hasPathSum(TreeNode root, int targetSum) {  
-19        if(root==null){
-20            return false;
-21        } 
-22        targetSum-=root.val;
-23        if(root.left==null && root.right==null){
-24            return targetSum==0;
-25        } 
-26        return hasPathSum(root.left,targetSum) || hasPathSum(root.right,targetSum);
-27    }
-28}
-29
-30
-31
-32
-33
+16class Solution {
+17    public boolean hasPathSum(TreeNode root, int targetSum) {
+18        if(root==null){
+19            return false;
+20        }
+21        if(root.left==null && root.right==null){
+22            return targetSum-root.val==0;
+23        }
+24        boolean left=hasPathSum(root.left,targetSum-root.val);
+25        boolean right=hasPathSum(root.right,targetSum-root.val);
+26        return left || right;
+27
+28
+29    }
+30}
