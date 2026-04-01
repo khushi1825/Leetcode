@@ -26,19 +26,19 @@
 26            if(root.left==null) return root.right;
 27            else if(root.right==null) return root.left;
 28            else{
-29                int min=min(root.right);
-30                root.right=deleteNode(root.right,min);
-31                root.val=min;
+29                int max=max(root.left);
+30                root.left=deleteNode(root.left,max);
+31                root.val=max;
 32            }
 33        }
 34        return root;
 35    }
 36
-37    public static int min(TreeNode root){
+37    public static int max(TreeNode root){
 38        if(root==null){
-39           return Integer.MAX_VALUE;
+39           return Integer.MIN_VALUE;
 40        }
-41        int left=min(root.left);
-42        return Math.min(left,root.val);
+41        int right=max(root.right);
+42        return Math.max(right,root.val);
 43    }
 44}
