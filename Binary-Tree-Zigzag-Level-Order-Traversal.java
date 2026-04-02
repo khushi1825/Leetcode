@@ -16,33 +16,27 @@
 16class Solution {
 17    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
 18        List<List<Integer>> res=new ArrayList<>();
-19        Queue<TreeNode> q=new LinkedList<>();
-20        if(root==null){
-21            return res;
-22        }
-23        q.add(root);
-24        boolean LeftToRight=true;
-25        while(!q.isEmpty()){
-26            int size=q.size();
-27            List<Integer> level=new ArrayList<>();
-28            for(int i=0;i<size;i++){
-29                TreeNode n=q.poll();
-30                if(LeftToRight){
-31                    level.add(n.val);
-32                }
-33                if(!LeftToRight){
-34                    level.add(0,n.val);
-35                }
-36                if(n.left!=null){
-37                    q.add(n.left);
-38                }
-39                if(n.right!=null){
-40                    q.add(n.right);
-41                }
-42            }
-43            res.add(level);
-44            LeftToRight=!LeftToRight;
-45        }
-46        return res;
-47    }
-48}
+19        if(root==null) return res;
+20        Queue<TreeNode> q=new LinkedList<>();
+21        q.add(root);
+22        boolean LtoR=true;
+23        while(!q.isEmpty()){
+24           List<Integer> level=new ArrayList<>();
+25           int size=q.size();
+26           for(int i=0;i<size;i++){
+27                TreeNode rv=q.poll();
+28                if(LtoR){
+29                    level.add(rv.val);
+30                }
+31                else{
+32                    level.add(0,rv.val);
+33                }
+34                if(rv.left!=null) q.add(rv.left);
+35                if(rv.right!=null) q.add(rv.right);  
+36            } 
+37            res.add(level);
+38            LtoR=!LtoR;
+39        }
+40        return res;
+41    }
+42}
