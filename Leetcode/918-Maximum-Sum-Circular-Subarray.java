@@ -1,63 +1,31 @@
 class Solution {
     public int maxSubarraySumCircular(int[] nums) {
-        //Bruteforce
-        // int n=nums.length;
-        // int maxSum=Integer.MIN_VALUE;
-        // for (int i=0;i<n;i++){
-        //     int currSum=0;
-        //     for (int j=i;j<n+i;j++){
-        //         currSum+=nums[(j)%n];
-        //         maxSum=Math.max(maxSum,currSum);
-        //     }
-        // }
-
-        // return maxSum;
-
-
-        // Bruteforce 
-        // for(int i=0;i<n;i++){
-        //     for(int j=i;;j++){
-        //         sum+=nums[j];
-        //         ans=Math.max(ans,sum);
-        //         j=(j+1)%n;
-        //         if(j==i){
-        //             break;
-        //         }
-        //     }
-        // }
-
-
-        // optimal
-        int ans1=maxSub(nums);
         int n=nums.length;
+        int maxsum=kadane(nums);
         int total_sum=0;
         for(int i=0;i<n;i++){
             total_sum+=nums[i];
             nums[i]=(-1)*nums[i];
         }
-
-        int sum2=maxSub(nums);
-        int ans2=total_sum+sum2;
-        if(ans2==0){
-            return ans1;
+        int minsum=kadane(nums);
+        int ans=Math.max(maxsum,total_sum+minsum);
+        if(ans==0){
+            return maxsum;
         }
-
-        return Math.max(ans1,ans2);
-
+        return ans;
     }
 
-    public static int maxSub(int [] nums){
+    public static int kadane(int [] nums){
         int n=nums.length;
-        int ans=Integer.MIN_VALUE;
+        int maxsum=Integer.MIN_VALUE;
         int sum=0;
         for(int i=0;i<n;i++){
             sum+=nums[i];
-            ans=Math.max(sum,ans);
+            maxsum=Math.max(maxsum,sum);
             if(sum<0){
                 sum=0;
             }
         }
-
-        return ans;
+        return maxsum;
     }
 }
